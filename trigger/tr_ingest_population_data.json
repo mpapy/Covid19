@@ -1,5 +1,5 @@
 {
-	"name": "population_trigger",
+	"name": "tr_ingest_population_data",
 	"properties": {
 		"annotations": [],
 		"runtimeState": "Started",
