@@ -48,6 +48,7 @@
 					],
 					"storeSettings": {
 						"type": "AzureBlobStorageReadSettings",
+						"recursive": true,
 						"enablePartitionDiscovery": false
 					},
 					"formatSettings": {
@@ -174,6 +175,13 @@
 								"dataset": {
 									"referenceName": "ds_population_raw_gz",
 									"type": "DatasetReference"
+								},
+								"logStorageSettings": {
+									"linkedServiceName": {
+										"referenceName": "Is_ablob_covidreportingsa",
+										"type": "LinkedServiceReference"
+									},
+									"path": "population"
 								},
 								"enableLogging": true,
 								"storeSettings": {
