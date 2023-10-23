@@ -1,0 +1,33 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "mpa-covid-reporting-adf"
+		},
+		"GitHub1_credential": {
+			"value": ""
+		},
+		"Is_ablob_covidreportingsa_connectionString": {
+			"value": ""
+		},
+		"Is_adls_covidreportingdl_accountKey": {
+			"value": ""
+		},
+		"GitHub1_properties_typeProperties_username": {
+			"value": "Marek"
+		},
+		"Is_adls_covidreportingdl_properties_typeProperties_url": {
+			"value": "https://mpacovidreportingdl.dfs.core.windows.net/"
+		},
+		"tr_ingest_population_data_properties_typeProperties_scope": {
+			"value": "/subscriptions/8674e292-ebf6-450f-89c8-8e7df143bf56/resourceGroups/covid-reporting-rg/providers/Microsoft.Storage/storageAccounts/mpacovidreportingsa"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}
