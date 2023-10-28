@@ -20,7 +20,19 @@
 		"Is_adls_covidreportingdl_properties_typeProperties_url": {
 			"value": "https://mpacovidreportingdl.dfs.core.windows.net/"
 		},
+		"Is_http_opendata_ecdc_europa_eu_properties_typeProperties_url": {
+			"value": "https://github.com"
+		},
+		"tr_ingest_hospital_admissions_data_properties_pl_ingest_ecdc_data_parameters_sourceRelativeURL": {
+			"value": "cloudboxacademy/covid19/raw/main/ecdc_data/hospital_admissions.csv"
+		},
+		"tr_ingest_hospital_admissions_data_properties_pl_ingest_ecdc_data_parameters_sinkFileName": {
+			"value": "hospital_admissions.csv"
+		},
 		"tr_ingest_population_data_properties_typeProperties_scope": {
+			"value": "/subscriptions/8674e292-ebf6-450f-89c8-8e7df143bf56/resourceGroups/covid-reporting-rg/providers/Microsoft.Storage/storageAccounts/mpacovidreportingsa"
+		},
+		"tr_ingest_population_data_1_properties_typeProperties_scope": {
 			"value": "/subscriptions/8674e292-ebf6-450f-89c8-8e7df143bf56/resourceGroups/covid-reporting-rg/providers/Microsoft.Storage/storageAccounts/mpacovidreportingsa"
 		}
 	}
