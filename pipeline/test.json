@@ -30,7 +30,10 @@
 						"referenceName": "ds_ecdc_file_list",
 						"type": "DatasetReference"
 					},
-					"firstRowOnly": true
+					"firstRowOnly": {
+						"value": "@variables('sourceRelativeURL')",
+						"type": "Expression"
+					}
 				}
 			},
 			{
