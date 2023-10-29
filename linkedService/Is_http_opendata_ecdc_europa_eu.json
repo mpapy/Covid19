@@ -2,10 +2,15 @@
 	"name": "Is_http_opendata_ecdc_europa_eu",
 	"properties": {
 		"description": "Getting data from ECDC",
+		"parameters": {
+			"sourceBaseURL": {
+				"type": "string"
+			}
+		},
 		"annotations": [],
 		"type": "HttpServer",
 		"typeProperties": {
-			"url": "https://github.com",
+			"url": "@{linkedService().sourceBaseURL}",
 			"enableServerCertificateValidation": true,
 			"authenticationType": "Anonymous"
 		}
