@@ -68,7 +68,7 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"fileName": {
-								"value": "@pipeline().parameters.sourceRelativeURL",
+								"value": "@pipeline().parameters.sinkFileName",
 								"type": "Expression"
 							}
 						}
