@@ -1,9 +1,9 @@
 {
-	"name": "pipeline1",
+	"name": "case_deaths_processing",
 	"properties": {
 		"activities": [
 			{
-				"name": "Data flow1",
+				"name": "df_transform_cases_deaths",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {
