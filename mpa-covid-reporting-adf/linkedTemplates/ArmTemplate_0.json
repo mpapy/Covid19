@@ -1088,7 +1088,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/case_deaths_processing')]",
+			"name": "[concat(parameters('factoryName'), '/pl_case_deaths_processing')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
