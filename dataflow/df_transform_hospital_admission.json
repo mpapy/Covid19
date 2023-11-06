@@ -225,7 +225,8 @@
 				"     preCommands: [],",
 				"     postCommands: [],",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> HospitalAdmissionsDailySink"
+				"     skipDuplicateMapOutputs: true,",
+				"     partitionBy('hash', 1)) ~> HospitalAdmissionsDailySink"
 			]
 		}
 	}
