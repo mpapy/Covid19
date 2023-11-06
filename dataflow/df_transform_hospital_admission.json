@@ -47,10 +47,22 @@
 					"name": "JoinWithDate"
 				},
 				{
-					"name": "pivot1"
+					"name": "PivotDaily"
 				},
 				{
-					"name": "pivot2"
+					"name": "PivotWeekly"
+				},
+				{
+					"name": "SortWeekly"
+				},
+				{
+					"name": "DailySort"
+				},
+				{
+					"name": "SelectWeeklyFinal"
+				},
+				{
+					"name": "select1"
 				}
 			],
 			"scriptLines": [
@@ -132,16 +144,15 @@
 				"     ignoreSpaces: false,",
 				"     broadcast: 'auto')~> JoinWithDate",
 				"SplitDailyFromWeekly@Daily pivot(groupBy(country,",
-				"          reported_date,",
-				"          reported_year_week,",
-				"          population,",
 				"          country_code_2_digit,",
 				"          country_code_3_digit,",
+				"          population,",
+				"          reported_date,",
 				"          source),",
 				"     pivotBy(indicator, ['Daily ICU occupancy', 'Daily hospital occupancy']),",
-				"     {} = sum(value),",
-				"     columnNaming: '$N$V',",
-				"     lateral: true) ~> pivot1",
+				"     count = sum(value),",
+				"     columnNaming: '$V_$N',",
+				"     lateral: true) ~> PivotDaily",
 				"JoinWithDate pivot(groupBy(country,",
 				"          country_code_2_digit,",
 				"          country_code_3_digit,",
@@ -151,9 +162,39 @@
 				"          week_end_date,",
 				"          source),",
 				"     pivotBy(indicator, ['Weekly new hospital admissions per 100k', 'Weekly new ICU admissions per 100k']),",
-				"     {} = sum(value),",
-				"     columnNaming: '$N$V',",
-				"     lateral: true) ~> pivot2"
+				"     count = sum(value),",
+				"     columnNaming: '$N_$V',",
+				"     lateral: true) ~> PivotWeekly",
+				"PivotWeekly sort(desc(reported_year_week, true),",
+				"     asc(country, true)) ~> SortWeekly",
+				"PivotDaily sort(desc(reported_date, true),",
+				"     asc(country, true)) ~> DailySort",
+				"SortWeekly select(mapColumn(",
+				"          country,",
+				"          country_code_2_digit,",
+				"          country_code_3_digit,",
+				"          population,",
+				"          reported_year_week,",
+				"          reported_week_start_date = week_start_date,",
+				"          reported_week_end_date = week_end_date,",
+				"          new_hospital_ocupancy_count = {count_Weekly new hospital admissions per 100k},",
+				"          new_icu_occupancy_count = {count_Weekly new ICU admissions per 100k},",
+				"          source",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> SelectWeeklyFinal",
+				"DailySort select(mapColumn(",
+				"          country,",
+				"          country_code_2_digit,",
+				"          country_code_3_digit,",
+				"          Population = population,",
+				"          reported_date,",
+				"          new_hospital_ocupancy_count = {Daily hospital occupancy_count},",
+				"          new_icu_occupancy_count = {Daily ICU occupancy_count},",
+				"          source",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1"
 			]
 		}
 	}
