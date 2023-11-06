@@ -26,7 +26,22 @@
 					"name": "DimDateSource"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "ds_hospital_admissions_weekly",
+						"type": "DatasetReference"
+					},
+					"name": "HospitalAdmissionsWeeklySink"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_hospital_admissions_daily",
+						"type": "DatasetReference"
+					},
+					"name": "HospitalAdmissionsDailySink"
+				}
+			],
 			"transformations": [
 				{
 					"name": "SelectOnlyRequiredFields"
@@ -62,7 +77,7 @@
 					"name": "SelectWeeklyFinal"
 				},
 				{
-					"name": "select1"
+					"name": "SelectDailyFinal"
 				}
 			],
 			"scriptLines": [
@@ -193,8 +208,24 @@
 				"          new_icu_occupancy_count = {Daily ICU occupancy_count},",
 				"          source",
 				"     ),",
+				"     partitionBy('hash', 1),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> select1"
+				"     skipDuplicateMapOutputs: true) ~> SelectDailyFinal",
+				"SelectWeeklyFinal sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     partitionBy('hash', 1)) ~> HospitalAdmissionsWeeklySink",
+				"SelectDailyFinal sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> HospitalAdmissionsDailySink"
 			]
 		}
 	}
